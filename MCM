@@ -1,0 +1,28 @@
+
+#include<bits/stdc++.h>
+#define INF 1<<30;
+using namespace std;
+int recur(vector<pair<int,int>>&vp, int i,int j){
+    if(i==j) return 0;
+    int min_cost = INF;
+        for(int k=i; k+1<=j; k++){
+            int ri = vp[i].first;
+            int ck = vp[k].second;
+            int cj = vp[j].second;
+            min_cost = min(min_cost,recur(vp,i,k)+recur(vp,k+1,j)+ri*ck*cj);
+        }
+    return min_cost;
+
+}
+int main(){
+    int i,j,n,a,b;
+    vector<pair<int,int>>vp;
+    printf("Enter the matrix: ");
+    cin>>n;
+    for(i=0; i<n; i++){
+        cin>>a>>b;
+        vp.push_back({a,b});
+    }
+    cout<<recur(vp,0,n-1)<<endl;
+
+}
