@@ -1,0 +1,22 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+int arr[100][100];
+int main(){
+    string st1,st2,st3;;
+    int i,j,n,m,x;
+    cin>>st1>>st2;
+    for(i=1; i<=st1.size(); i++){
+        for(j=1; j<=st2.size(); j++){
+            if(st1[i-1]==st2[j-1]){
+                arr[i][j]=arr[i-1][j-1]+1;
+            }
+            else{
+                x = max(arr[i][j-1],arr[i-1][j]);
+                arr[i][j] = x;
+            }
+        }
+    }
+
+    cout<<"\nLength of lcs: "<<x<<endl;
+}
