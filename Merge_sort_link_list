@@ -1,0 +1,89 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+    int num;
+    node *newnode;
+    node *next;
+}*head=NULL;
+
+node *Merge(node *first, node *second){
+    node *answer = NULL;
+    if(!first)
+        return second;
+    else if(!second)
+        return first;
+    if(first->num<=second->num){
+        answer = first;
+        answer->next = Merge(first->next, second);
+    }
+    else{
+        answer = second;
+        answer->next = Merge(first, second->next);
+    }
+return answer;
+}
+
+void mid(node *cur, node **first, node **second){
+    node *fast;
+    node *slow;
+    slow = cur;
+    fast = cur->next;
+    while(fast!=NULL){
+        fast = fast->next;
+        if(fast!=NULL){
+            slow=slow->next;
+            fast=fast->next;
+        }
+    }
+    *first = cur;
+    *second = slow->next;
+    slow->next = NULL;
+}
+void mergesorting(node** stnode){
+    node *cur = *stnode;
+    node *first;
+    node *second;
+    if(!cur || !cur->next)
+        return;
+    mid(cur,&first,&second);
+    mergesorting(&first);
+    mergesorting(&second);
+    *stnode = Merge(first,second);
+}
+
+void createnode(int n){
+    node *temp,*newn;
+    cout<<"Enter the data: ";
+    for(int i=0; i<n; i++){
+        newn = (node *)malloc(sizeof(node));
+        cin>>newn->num;
+        newn->next=NULL;
+        if(head==NULL){
+            head = newn;
+            temp = head;
+        }
+        else{
+            temp->next=newn;
+            temp = temp->next;
+        }
+    }
+}
+void display(){
+    node *temp;
+    cout<<"\nAll data sorted: ";
+    while(head!=NULL){
+        cout<<head->num<<" ";
+        head=head->next;
+    }
+   printf("\n");
+}
+int main(){
+    int n;
+    cout<<"Enter the data size: ";
+    cin>>n;
+    createnode(n);
+    mergesorting(&head);
+    display();
+return 0;
+}
+
