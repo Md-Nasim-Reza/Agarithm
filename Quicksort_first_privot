@@ -1,0 +1,69 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+int swapp(int *x, int *y){
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+Quick_sort(int ar[], int low, int n){
+    int i=low,pi=low,j=n;
+    while(i<j){
+        while(ar[i]<=ar[pi]){
+            i++;
+            cout<<"i = "<<i<<endl;
+            for(int a=low; a<=n; a++){
+                cout<<ar[a]<<" ";
+            }
+            cout<<endl;
+        }
+        while(ar[j]>ar[pi]){
+            j--;
+             cout<<"j = "<<j<<endl;
+            for(int a=low; a<=n; a++){
+                cout<<ar[a]<<" ";
+            }
+            cout<<endl;
+        }
+
+        if(i<j){
+        swapp(&ar[i],&ar[j]);
+         cout<<"j = "<<j<<endl;
+            for(int a=low; a<=n; a++){
+                cout<<ar[a]<<" ";
+            }
+            cout<<endl;
+        }
+    }
+    swapp(&ar[low], &ar[j]);
+     cout<<"j = "<<j<<endl;
+            for(int a=low; a<=n; a++){
+                cout<<ar[a]<<" ";
+            }
+            cout<<endl;
+
+    return j;
+}
+void Quicksort(int arr[], int low, int hi){
+
+    if(low<hi){
+        int location = Quick_sort(arr,low,hi);
+        Quicksort(arr,low,location-1);
+        Quicksort(arr,location+1, hi);
+    }
+}
+int main(){
+    int i,n;
+    cin>>n;
+    int arr[n];
+    for(i=1; i<=n; i++){
+        cin>>arr[i];
+
+    }
+    Quicksort(arr,1,n);
+    for(i=1; i<=n; i++)
+        cout<<arr[i]<<" ";
+    cout<<endl;
+
+}
