@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+void swapp(int *x, int *y){
+    int temp;
+    temp = *x;
+    *x=*y;
+    *y=temp;
+}
+int Quick_sort(int ar[], int j, int privot){
+    int i = j-1,x=j,y=privot;
+    while(j<privot){
+        if(ar[j]<ar[privot]){
+            i++;
+            swapp(&ar[i],&ar[j]);
+        }
+        j++;
+        for(int a=x; a<=y; a++)
+            cout<<ar[a]<<" ";
+        cout<<endl;
+    }
+    i++;
+        swapp(&ar[i],&ar[privot]);
+    for(int a=x; a<=y; a++)
+        cout<<ar[a]<<" ";
+    cout<<endl;
+    return i;
+}
+void Quicksort(int ar[], int j, int privot){
+    if(j<privot){
+        int location = Quick_sort(ar,j,privot);
+        Quicksort(ar,j,location-1);
+        Quicksort(ar,location+1,privot);
+    }
+}
+int main(){
+    int i,n;
+    cin>>n;
+   int arr[n];
+    for(i=1; i<=n; i++){
+        cin>>arr[i];
+    }
+    Quicksort(arr,1,n);
+    for(i=1; i<=n; i++)
+        cout<<arr[i]<<" ";
+}
