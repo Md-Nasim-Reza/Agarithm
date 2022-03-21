@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+void Merge(int arr[], int p, int q, int r){
+    int i,j,k;
+    int n1=q-p+1;
+    int n2=r-q;
+    int Left[n1+1],Right[n2+1];
+    for(i=0; i<n1; i++){
+        Left[i]=arr[p+i];
+    }
+    for(j=0; j<n2; j++){
+        Right[j]=arr[q+1+j];
+    }
+    i=0,j=0,k=p;
+    while(i<n1 && j<n2){
+        if(Left[i]<=Right[j]){
+            arr[k]=Left[i];
+            i++;
+            k++;
+        }
+        else{
+            arr[k]=Right[j];
+            k++;
+            j++;
+        }
+    }
+    while(i<n1){
+        arr[k++]=Left[i++];
+    }
+    while(j<n2){
+        arr[k++]=Right[j++];
+    }
+
+}
+void Merge_sort(int arr[], int p, int r){
+    int q;
+    if(p<r){
+        q=(p+r)/2;
+        Merge_sort(arr,p,q);
+        Merge_sort(arr,q+1,r);
+        Merge(arr,p,q,r);
+    }
+}
+int main(){
+    int arr[10000],p,r;
+    cin>>r;
+    for(int i=0; i<r; i++){
+        cin>>arr[i];
+    }
+    Merge_sort(arr, 0, r-1);
+    cout<<"\nAll data sorted: ";
+    for(p=0; p<r; p++)
+        cout<<arr[p]<<" ";
+    cout<<endl;
+return 0;
+}
