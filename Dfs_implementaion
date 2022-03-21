@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<int> va[10000];
+int vist[10000],node;
+int src;
+void bfs(int v){
+    cout<<v<<" "; /// inorder print
+    vist[v]=1;
+    for(int i=0; i<va[v].size(); i++){
+        int child = va[v][i];
+        if(vist[child]==0){
+            bfs(child);
+        }
+    }
+    //cout<<v<<" "; ///postorder print
+}
+int main(){
+    int i,j,edge,u,v;
+    cin>>node>>edge;
+    for(i=0; i<edge; i++){
+        cin>>u>>v;
+        va[u].push_back(v);
+        va[v].push_back(u);
+    }
+    printf("Enter the source node: ");
+    cin>>src;
+    bfs(src);
+}
