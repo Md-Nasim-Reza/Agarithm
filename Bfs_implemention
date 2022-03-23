@@ -15,7 +15,6 @@ int main(){
     cin>>srs;
     visit[srs]=1;
     qq.push(srs);
-    dis[srs]=0;
     while(!qq.empty()){
         v = qq.front();
         qq.pop();
@@ -31,3 +30,44 @@ int main(){
     }
 return 0;
 }
+
+
+
+/*
+#include<bits/stdc++.h>
+using namespace std;
+int adj[1000][1000];
+int visit[10000];
+void solution(int node){
+    int src,i;
+    printf("Enter the source node: ");
+    cin>>src;
+    queue<int>qq;
+    visit[src]=1;
+    qq.push(src);
+    while(!qq.empty()){
+        int x = qq.front();
+        qq.pop();
+        cout<<x<<" ";
+        for(i=1; i<=node; i++){
+            if(adj[x][i]==1){
+                if(visit[i]==0){
+                    qq.push(i);
+                    visit[i]=1;
+                }
+            }
+        }
+    }
+    cout<<endl;
+}
+int main(){
+    int i,node,edge,u,v;
+    cin>>node>>edge;
+    for(i=1; i<=edge; i++){
+        cin>>u>>v;
+        adj[u][v]=1;
+    }
+    solution(node);
+return 0;
+}
+*/
